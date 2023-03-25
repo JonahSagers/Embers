@@ -45,21 +45,21 @@ public class UmbrellaDrag : MonoBehaviour
             lastPosition = mousePosition;
             rb.velocity = Vector2.zero;
             mousePosition.y += 1.5f;
-            if(mousePosition.y < -6.5f)
+            if(mousePosition.y < -7.523f)
             {
-                mousePosition.y = -6.5f;
+                mousePosition.y = -7.523f;
             }
-            if(mousePosition.y > 7.5f)
+            if(mousePosition.y > 8.45f)
             {
-                mousePosition.y = 7.5f;
+                mousePosition.y = 8.45f;
             }
-            if(mousePosition.x < -21.5f)
+            if(mousePosition.x < -17.1f)
             {
-                mousePosition.x = -21.5f;
+                mousePosition.x = -17.1f;
             }
-            if(mousePosition.x > 21.5f)
+            if(mousePosition.x > 17.1f)
             {
-                mousePosition.x = 21.5f;
+                mousePosition.x = 17.1f;
             }
             Xpos = selectedObject.transform.position.x;
             Ypos = selectedObject.transform.position.y;

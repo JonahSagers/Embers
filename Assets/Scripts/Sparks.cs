@@ -41,11 +41,11 @@ public class Sparks : MonoBehaviour
         if(fireStrength < 200)
         {
             //backlight.intensity = fireStrength / 200;
-            //fog.intensity = fireStrength / 200;
+            fog.intensity = fireStrength / 200;
         }
         else
         {
-            //fog.intensity = 1;
+            fog.intensity = 1;
             //backlight.intensity = 1;
         }
         if(fireStrength < 0 && gameOver == false)
@@ -66,35 +66,33 @@ public class Sparks : MonoBehaviour
                 SceneManager.LoadScene("Embers 2022");
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space) && gameOver == false)
+        if(Input.GetMouseButtonDown(0) && fireStrength < 1 && sparkStrength < 100)
         {
             sparksParticles.Play();
-            if(fireStrength < 1 && sparkStrength < 100)
+            sparkStrength += 20;
+            sampleText.SetFloat("sparkStrength", sparkStrength);
+            if(sparkStrength == 100)
             {
-                sparkStrength += 20;
-                sampleText.SetFloat("sparkStrength", sparkStrength);
-                if(sparkStrength == 100)
-                {
-                    fireStrength += 1000;
-                    fireParticles.Play();
-                }
-            }
-            else
-            {
-                if(woodpile.woodCount > 0)
-                {
-                    woodpile.woodCount -= 1;
-                    fireStrength += 100;
-                }
+                fireStrength += 1000;
+                fireParticles.Play();
             }
         }
-        
     }
     void FixedUpdate()
     {
         if(sparkStrength == 100)
         {
             //fireStrength -= 0.1f + wind.windForce;
+        }
+    }
+
+    void OnMouseDown()
+    {
+        if(woodpile.woodCount > 0 && gameOver == false)
+        {
+            sparksParticles.Play();
+            woodpile.woodCount -= 1;
+            fireStrength += 100;
         }
     }
 }

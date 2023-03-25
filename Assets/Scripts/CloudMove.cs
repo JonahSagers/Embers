@@ -63,14 +63,14 @@ public class CloudMove : MonoBehaviour
             }
             
             gameObject.transform.position += new Vector3(Xvel,0,0);
-            lightningTime += 1;
-            if(lightningTime == lightningPoint)
-            {
-                lightning.intensity = 10;
-                lightning.pointLightOuterRadius = 10;
-            }
-            lightning.intensity /= 1.5f;
-            lightning.pointLightOuterRadius /=1.5f;
+            // lightningTime += 1;
+            // if(lightningTime == lightningPoint)
+            // {
+            //     lightning.intensity = 10;
+            //     lightning.pointLightOuterRadius = 10;
+            // }
+            // lightning.intensity /= 1.5f;
+            // lightning.pointLightOuterRadius /=1.5f;
         }
         if(sparks.gameOver == true)
         {

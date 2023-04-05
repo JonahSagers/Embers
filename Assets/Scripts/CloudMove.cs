@@ -81,7 +81,7 @@ public class CloudMove : MonoBehaviour
     void FixedUpdate()
     {
         Below.x = transform.position.x - 1;
-        Below.y = transform.position.y - 7;
+        Below.y = -2;
         Pos.x = transform.position.x - 1;
         Pos.y = transform.position.y;
         RaycastHit2D hit = Physics2D.Raycast(Pos, Below, collisions);

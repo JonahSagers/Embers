@@ -17,6 +17,8 @@ public class Sparks : MonoBehaviour
     public float resetCooldown;
     public ParticleSystem fireParticles;
     public Animator sampleText;
+    public List<AudioSource> audioSources;
+    public float lightOffset;
     // Start is called before the first frame update
     void Start()
     {
@@ -69,6 +71,8 @@ public class Sparks : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && fireStrength < 1 && sparkStrength < 100)
         {
             sparksParticles.Play();
+            int audioValue = (int)(sparkStrength/20);
+            audioSources[audioValue].Play();
             sparkStrength += 20;
             sampleText.SetFloat("sparkStrength", sparkStrength);
             if(sparkStrength == 100)
@@ -80,9 +84,8 @@ public class Sparks : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(sparkStrength == 100)
-        {
-            //fireStrength -= 0.1f + wind.windForce;
+        if(lightOffset > 0.01f){
+            lightOffset /= 1.02f;
         }
     }
 
@@ -90,9 +93,15 @@ public class Sparks : MonoBehaviour
     {
         if(woodpile.woodCount > 0 && gameOver == false)
         {
-            sparksParticles.Play();
             woodpile.woodCount -= 1;
-            fireStrength += 100;
         }
+        
+    }
+
+    public void StokeFire()
+    {
+        sparksParticles.Play();
+        fireStrength += 10;
+        lightOffset = 0.5f;
     }
 }

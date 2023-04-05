@@ -8,6 +8,7 @@ public class WoodClick : MonoBehaviour
     public ParticleSystem woodParticles;
     public float woodCount;
     public Sparks sparks;
+    public float chopDelay;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +27,21 @@ public class WoodClick : MonoBehaviour
             if (targetObject)
             {
                 Debug.Log("Wood Clicked");
-                woodParticles.Play();
-                if(woodCount < 6)
+                if(woodCount < 6 && chopDelay < 1)
                 {
+                    woodParticles.Play();
                     woodCount += 1;
+                    //chopDelay = 20;
+                    //Use this to prevent chop spamming
                 }
             }
         }
     }
+
+    // void FixedUpdate()
+    // {
+    //     if(chopDelay > 0){
+    //         chopDelay -= 1;
+    //     }
+    // }
 }

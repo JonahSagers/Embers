@@ -12,8 +12,6 @@ public class WoodSprite : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        woodpile = GameObject.FindGameObjectWithTag("Wood").GetComponent<WoodClick>();
-        visible = gameObject.GetComponent<SpriteRenderer>();
         visible.enabled = false;
     }
 

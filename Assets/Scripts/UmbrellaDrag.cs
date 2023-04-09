@@ -18,14 +18,7 @@ public class UmbrellaDrag : MonoBehaviour
     Vector2 mouseForce;
     Vector3 lastPosition;
     public LayerMask umbrella;
-    void Start()
-    {
-        wind = GameObject.Find("WindImpulse").GetComponent<WindImpulse>();
-        rb = GetComponent<Rigidbody2D>();
-        box = GetComponent<BoxCollider2D>();
-        selectedObject = null;
-        
-    }
+
     void Update()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

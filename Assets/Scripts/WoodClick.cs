@@ -9,14 +9,7 @@ public class WoodClick : MonoBehaviour
     public float woodCount;
     public Sparks sparks;
     public float chopDelay;
-    // Start is called before the first frame update
-    void Start()
-    {
-        sparks = GameObject.Find("Sparks").GetComponent<Sparks>();
-        woodParticles = gameObject.GetComponent<ParticleSystem>();
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);

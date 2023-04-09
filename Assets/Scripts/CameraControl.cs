@@ -10,8 +10,6 @@ public class CameraControl : MonoBehaviour
 
     void Start()
     {
-        sparks = GameObject.Find("Sparks").GetComponent<Sparks>();
-        camera = gameObject.GetComponent<Camera>();
         camera.orthographicSize = 5;
     }
     //DEV NOTE: if the camera is not in the right place, set the y position to -4.5

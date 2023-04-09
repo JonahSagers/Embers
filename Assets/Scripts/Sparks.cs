@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Sparks : MonoBehaviour
 {
@@ -16,21 +17,15 @@ public class Sparks : MonoBehaviour
     public Light2D fog;
     public float resetCooldown;
     public ParticleSystem fireParticles;
-    public Animator sampleText;
+    public Animator textAnim;
+    public TextMeshProUGUI text;
     public List<AudioSource> audioSources;
     public float lightOffset;
     // Start is called before the first frame update
     void Start()
     {
-        sampleText = GameObject.Find("Press Space").GetComponent<Animator>();
-        backlight = GameObject.Find("Backlight").gameObject.GetComponent<Light2D>();
-        fog = GameObject.Find("NightFog").gameObject.GetComponent<Light2D>();
         gameOver = false;
         fireStrength = 0;
-        wind = GameObject.Find("WindImpulse").GetComponent<WindImpulse>();
-        sparksParticles = GetComponent<ParticleSystem>();
-        woodpile = GameObject.FindGameObjectWithTag("Wood").GetComponent<WoodClick>();
-        fireParticles = GameObject.Find("Fire").GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -71,10 +66,10 @@ public class Sparks : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && fireStrength < 1 && sparkStrength < 100)
         {
             sparksParticles.Play();
-            int audioValue = (int)(sparkStrength/20);
-            audioSources[audioValue].Play();
+            //int audioValue = (int)(sparkStrength/20);
+            //audioSources[audioValue].Play();
             sparkStrength += 20;
-            sampleText.SetFloat("sparkStrength", sparkStrength);
+            textAnim.SetFloat("sparkStrength", sparkStrength);
             if(sparkStrength == 100)
             {
                 fireStrength += 1000;

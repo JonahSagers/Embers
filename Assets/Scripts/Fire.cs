@@ -5,7 +5,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public class Fire : MonoBehaviour
 {
-    private ParticleSystem fireParticles;
+    public ParticleSystem fireParticles;
     public ParticleSystemForceField windImpulse;
     public WindImpulse wind;
     public Sparks sparks;
@@ -14,20 +14,7 @@ public class Fire : MonoBehaviour
     public Light2D yellow;
     public float fireOffset;
     public float lightOffset;
-    // Start is called before the first frame update
-    void Start()
-    {
-        wind = GameObject.Find("WindImpulse").GetComponent<WindImpulse>();
-        windImpulse = gameObject.GetComponent<ParticleSystemForceField>();
-        Debug.Log("Hello World");
-        sparks = GameObject.FindGameObjectWithTag("Sparks").GetComponent<Sparks>();
-        red = gameObject.transform.GetChild(0).gameObject.GetComponent<Light2D>();
-        orange = gameObject.transform.GetChild(1).gameObject.GetComponent<Light2D>();
-        yellow = gameObject.transform.GetChild(2).gameObject.GetComponent<Light2D>();
-        fireParticles = GetComponent<ParticleSystem>();
-    }
 
-    // Update is called once per frame
     void Update()
     {
         var fireParticleRate = fireParticles.emission;
@@ -42,6 +29,5 @@ public class Fire : MonoBehaviour
         orange.pointLightOuterRadius += (sparks.fireStrength/200 - orange.pointLightOuterRadius)/3 + sparks.lightOffset;
         yellow.pointLightOuterRadius += (sparks.fireStrength/40 - yellow.pointLightOuterRadius)/3 + sparks.lightOffset*2;
         //Debug.Log("Fire Strength: " + sparks.fireStrength);
-        
     }
 }

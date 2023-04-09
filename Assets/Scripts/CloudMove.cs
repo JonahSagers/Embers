@@ -19,26 +19,7 @@ public class CloudMove : MonoBehaviour
     Vector2 Pos;
     public WindImpulse wind;
     public bool raining;
-    public Light2D lightning;
-    public float lightningTime;
-    public int lightningPoint;
-    // Start is called before the first frame update
-    void Start()
-    {
-        raining = false;
-        //fire = GameObject.FindGameObjectWithTag("Fire").GetComponent<ParticleSystem>();
-        lightning = gameObject.GetComponent<Light2D>();
-        sparks = GameObject.FindGameObjectWithTag("Sparks").GetComponent<Sparks>();
-        sparksRb = GameObject.FindGameObjectWithTag("Sparks").GetComponent<BoxCollider2D>();
-        umbrellaRb = GameObject.FindGameObjectWithTag("Umbrella").GetComponent<BoxCollider2D>();
-        CloudParticles = GetComponent<ParticleSystem>();
-        RainParticles = GameObject.Find("Rain").GetComponent<ParticleSystem>();
-        wind = GameObject.Find("WindImpulse").GetComponent<WindImpulse>();
-        lightningTime = 0;
-        lightningPoint = Random.Range(100, 200);
-    }
 
-    // Update is called once per frame
     void Update()
     {
         Position = gameObject.transform.position;
@@ -63,14 +44,6 @@ public class CloudMove : MonoBehaviour
             }
             
             gameObject.transform.position += new Vector3(Xvel,0,0);
-            // lightningTime += 1;
-            // if(lightningTime == lightningPoint)
-            // {
-            //     lightning.intensity = 10;
-            //     lightning.pointLightOuterRadius = 10;
-            // }
-            // lightning.intensity /= 1.5f;
-            // lightning.pointLightOuterRadius /=1.5f;
         }
         if(sparks.gameOver == true)
         {

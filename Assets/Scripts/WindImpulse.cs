@@ -12,19 +12,7 @@ public class WindImpulse : MonoBehaviour
     public float difficulty;
     public Sparks sparks;
     public ParticleSystemForceField windImpulse;
-    // Start is called before the first frame update
-    void Start()
-    {
-        windImpulse = gameObject.GetComponent<ParticleSystemForceField>();
-        sparks = GameObject.FindGameObjectWithTag("Sparks").GetComponent<Sparks>();
-        windParticles = GetComponent<ParticleSystem>();
-        //windDelay = Random.Range(500f, 1000f);
-        windDelay = 10;
-        windDuration = 0;
-        difficulty = 1;
-    }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if(sparks.gameOver == false && sparks.sparkStrength == 100)

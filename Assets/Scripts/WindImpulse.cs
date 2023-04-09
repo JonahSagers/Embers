@@ -31,17 +31,8 @@ public class WindImpulse : MonoBehaviour
             }
             else
             {
-                if(windDuration < 2 && sparks.gameOver != true)
-                {
-                    //windParticleMain.startLifetime = 5;
-                }
-                else
-                {
-                    //windParticleMain.startLifetime = 0;
-                }
                 if(windDuration < 3.14f)
                 {
-
                     windDuration += 0.02f;
                     windForce = Mathf.Sin(windDuration) * difficulty/2;
                     if(windDirection)
@@ -68,6 +59,9 @@ public class WindImpulse : MonoBehaviour
                     windForce = 0;
                 }
             }
+        } else {
+            var windParticleEmission = windParticles.emission;
+            windParticleEmission.rateOverTime = 0;
         }
     }
     void CreateWind()

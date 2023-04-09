@@ -47,7 +47,10 @@ public class CloudMove : MonoBehaviour
         }
         if(sparks.gameOver == true)
         {
-            CloudParticles.Stop();
+            var CloudPartEmission = CloudParticles.emission;
+            var RainPartEmission = RainParticles.emission;
+            CloudPartEmission.rateOverTime = 0;
+            RainPartEmission.rateOverTime = 0;
         }
         
     }

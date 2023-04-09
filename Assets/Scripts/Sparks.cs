@@ -21,6 +21,7 @@ public class Sparks : MonoBehaviour
     public TextMeshProUGUI text;
     public List<AudioSource> audioSources;
     public float lightOffset;
+    public float score;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,39 +32,26 @@ public class Sparks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(fireStrength > 1000)
-        {
-            fireStrength = 1000;
-        }
         if(fireStrength < 200)
         {
-            //backlight.intensity = fireStrength / 200;
             fog.intensity = fireStrength / 200;
         }
         else
         {
             fog.intensity = 1;
-            //backlight.intensity = 1;
         }
         if(fireStrength < 0 && gameOver == false)
         {
+            resetCooldown = 250;
             gameOver = true;
-            Debug.Log("Game Over");
-            resetCooldown = 300;
+            text.text = "Score: " + Mathf.Floor(score);
+            textAnim.SetFloat("sparkStrength", 0);
         }
-        if(gameOver == true)
+        if(resetCooldown < 100 && gameOver == true)
         {
-            fireStrength = 0;
-            if(resetCooldown > 0)
-            {
-                resetCooldown -= 1;
-            }
-            else 
-            {
-                SceneManager.LoadScene("Embers 2022");
-            }
+            textAnim.SetFloat("sparkStrength", 100);
         }
-        if(Input.GetMouseButtonDown(0) && fireStrength < 1 && sparkStrength < 100)
+        if(Input.GetMouseButtonDown(0) && fireStrength < 1 && sparkStrength < 100 && gameOver == false)
         {
             sparksParticles.Play();
             //int audioValue = (int)(sparkStrength/20);
@@ -82,6 +70,22 @@ public class Sparks : MonoBehaviour
         if(lightOffset > 0.01f){
             lightOffset /= 1.02f;
         }
+        if(fireStrength > 0){
+            fireStrength -= 1f * wind.difficulty/5;
+            fireStrength = Mathf.Clamp(fireStrength,0,1000);
+        }
+        if(gameOver == true)
+        {
+            if(resetCooldown > 0)
+            {
+                resetCooldown -= 1;
+            }
+            else 
+            {
+                SceneManager.LoadScene("Embers 2022");
+            }
+        }
+        score += 0.02f * wind.difficulty;
     }
 
     void OnMouseDown()

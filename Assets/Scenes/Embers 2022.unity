@@ -1087,6 +1087,7 @@ MonoBehaviour:
   - {fileID: 784906258}
   - {fileID: 784906257}
   lightOffset: 0
+  score: 0
 --- !u!199 &784906253
 ParticleSystemRenderer:
   serializedVersion: 6

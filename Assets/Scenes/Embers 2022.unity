@@ -6428,7 +6428,7 @@ MonoBehaviour:
   rb: {fileID: 786313092}
   wind: {fileID: 1567798251}
   box: {fileID: 786313093}
-  selectedObject: {fileID: 786313087}
+  selectedObject: {fileID: 0}
   sparks: {fileID: 784906252}
   umbrellaPos: {x: 0, y: 0, z: 0}
   Xpos: 0

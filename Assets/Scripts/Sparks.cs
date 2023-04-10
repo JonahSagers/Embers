@@ -40,7 +40,7 @@ public class Sparks : MonoBehaviour
         {
             fog.intensity = 1;
         }
-        if(fireStrength < 0 && gameOver == false)
+        if(fireStrength <= 0 && gameOver == false && sparkStrength >= 100)
         {
             resetCooldown = 250;
             gameOver = true;
@@ -58,7 +58,7 @@ public class Sparks : MonoBehaviour
             //audioSources[audioValue].Play();
             sparkStrength += 20;
             textAnim.SetFloat("sparkStrength", sparkStrength);
-            if(sparkStrength == 100)
+            if(sparkStrength >= 100)
             {
                 fireStrength += 1000;
                 fireParticles.Play();
@@ -86,7 +86,7 @@ public class Sparks : MonoBehaviour
                 SceneManager.LoadScene("Embers 2022");
             }
         }
-        score += 0.02f * wind.difficulty;
+        score += 0.04f * wind.difficulty;
     }
 
     void OnMouseDown()

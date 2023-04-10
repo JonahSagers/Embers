@@ -24,7 +24,7 @@ public class UmbrellaDrag : MonoBehaviour
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && sparks.sparkStrength >= 100 && sparks.gameOver == false)
         {
             Collider2D targetObject = Physics2D.OverlapPoint(mousePosition, umbrella);
             if (targetObject)
@@ -33,7 +33,7 @@ public class UmbrellaDrag : MonoBehaviour
                 offset = selectedObject.transform.position - mousePosition;
             }
         }
-        if (selectedObject && sparks.gameOver == false)
+        if (selectedObject)
         {
             mouseForce = (mousePosition - lastPosition) / Time.deltaTime;
             lastPosition = mousePosition;

@@ -21,6 +21,7 @@ public class Sparks : MonoBehaviour
     public TextMeshProUGUI text;
     public float lightOffset;
     public float score;
+    public bool isDark;
     public List<AudioSource> audioSources;
     // Start is called before the first frame update
     void Start()
@@ -32,13 +33,22 @@ public class Sparks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(fireStrength < 200)
+        if(score > 150 && isDark == false)
+        {
+            isDark = true;
+            text.text = "It's getting dark";
+            textAnim.Play("QuickFade");
+        }
+        if(fireStrength < 200 && !isDark)
         {
             fog.intensity = fireStrength / 200;
-        }
-        else
-        {
-            fog.intensity = 1;
+        } else {
+            if(isDark)
+            {
+                fog.intensity = fog.intensity / 1.002f;
+            } else {
+                fog.intensity = 1;
+            }
         }
         if(fireStrength <= 0 && gameOver == false && sparkStrength >= 100)
         {
@@ -67,11 +77,16 @@ public class Sparks : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(lightOffset > 0.01f){
-            lightOffset /= 1.02f;
+        if(lightOffset > 0){
+            if(gameOver == false){
+                lightOffset /= 1.02f;
+            } else {
+                lightOffset /= 2f;
+            }
+            
         }
         if(fireStrength > 0){
-            fireStrength -= 0.5f + wind.difficulty/10;
+            fireStrength -= 0.25f + wind.difficulty/10;
             fireStrength = Mathf.Clamp(fireStrength,0,1000);
         }
         if(gameOver == true)
@@ -100,7 +115,7 @@ public class Sparks : MonoBehaviour
     public void StokeFire()
     {
         sparksParticles.Play();
-        fireStrength += 12.5f + wind.difficulty/20;
+        fireStrength += 25f + wind.difficulty/20;
         lightOffset = 0.5f;
     }
 }

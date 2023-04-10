@@ -15,9 +15,11 @@ public class WindImpulse : MonoBehaviour
 
     void FixedUpdate()
     {
+        var windParticleEmission = windParticles.emission;
+        var windParticleMain = windParticles.main;
         if(sparks.gameOver == false && sparks.sparkStrength == 100)
         {
-            var windParticleMain = windParticles.main;
+            windParticleEmission.rateOverTime = 4;
             //windParticleMain.startSpeed = windForce * 5;
             windImpulse.directionX = windForce * 4;
             difficulty += 0.0002f;
@@ -60,7 +62,6 @@ public class WindImpulse : MonoBehaviour
                 }
             }
         } else {
-            var windParticleEmission = windParticles.emission;
             windParticleEmission.rateOverTime = 0;
         }
     }

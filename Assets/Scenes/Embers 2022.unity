@@ -1081,7 +1081,8 @@ MonoBehaviour:
   textAnim: {fileID: 1267135401}
   text: {fileID: 1267135399}
   lightOffset: 0
-  score: 0
+  score: 130
+  isDark: 0
   audioSources:
   - {fileID: 784906261}
   - {fileID: 784906260}

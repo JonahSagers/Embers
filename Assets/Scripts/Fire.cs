@@ -27,7 +27,7 @@ public class Fire : MonoBehaviour
         fireParticleShape.randomPositionAmount = 1 + sparks.fireStrength/500;
         red.pointLightOuterRadius += (sparks.fireStrength/300 - red.pointLightOuterRadius)/3 + sparks.lightOffset/2;
         orange.pointLightOuterRadius += (sparks.fireStrength/200 - orange.pointLightOuterRadius)/3 + sparks.lightOffset;
-        yellow.pointLightOuterRadius += (sparks.fireStrength/40 - yellow.pointLightOuterRadius)/3 + sparks.lightOffset*2;
+        yellow.pointLightOuterRadius += (sparks.fireStrength/40 - yellow.pointLightOuterRadius)/3;
         //Debug.Log("Fire Strength: " + sparks.fireStrength);
     }
 }

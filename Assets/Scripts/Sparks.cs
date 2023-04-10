@@ -19,9 +19,9 @@ public class Sparks : MonoBehaviour
     public ParticleSystem fireParticles;
     public Animator textAnim;
     public TextMeshProUGUI text;
-    public List<AudioSource> audioSources;
     public float lightOffset;
     public float score;
+    public List<AudioSource> audioSources;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,7 +71,7 @@ public class Sparks : MonoBehaviour
             lightOffset /= 1.02f;
         }
         if(fireStrength > 0){
-            fireStrength -= 1f * wind.difficulty/5;
+            fireStrength -= 0.5f + 1f* wind.difficulty/10;
             fireStrength = Mathf.Clamp(fireStrength,0,1000);
         }
         if(gameOver == true)
@@ -79,6 +79,7 @@ public class Sparks : MonoBehaviour
             if(resetCooldown > 0)
             {
                 resetCooldown -= 1;
+                fireStrength = 0;
             }
             else 
             {

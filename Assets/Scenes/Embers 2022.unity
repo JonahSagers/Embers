@@ -1080,14 +1080,14 @@ MonoBehaviour:
   fireParticles: {fileID: 1860815577}
   textAnim: {fileID: 1267135401}
   text: {fileID: 1267135399}
+  lightOffset: 0
+  score: 0
   audioSources:
   - {fileID: 784906261}
   - {fileID: 784906260}
   - {fileID: 784906259}
   - {fileID: 784906258}
   - {fileID: 784906257}
-  lightOffset: 0
-  score: 0
 --- !u!199 &784906253
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -6429,6 +6429,7 @@ MonoBehaviour:
   wind: {fileID: 1567798251}
   box: {fileID: 786313093}
   selectedObject: {fileID: 786313087}
+  sparks: {fileID: 784906252}
   umbrellaPos: {x: 0, y: 0, z: 0}
   Xpos: 0
   Ypos: 0

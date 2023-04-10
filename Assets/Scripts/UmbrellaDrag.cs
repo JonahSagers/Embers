@@ -8,6 +8,7 @@ public class UmbrellaDrag : MonoBehaviour
     public WindImpulse wind;
     public BoxCollider2D box;
     public GameObject selectedObject;
+    public Sparks sparks;
     public Vector3 umbrellaPos;
     public float Xpos;
     public float Ypos;
@@ -32,7 +33,7 @@ public class UmbrellaDrag : MonoBehaviour
                 offset = selectedObject.transform.position - mousePosition;
             }
         }
-        if (selectedObject)
+        if (selectedObject && sparks.gameOver == false)
         {
             mouseForce = (mousePosition - lastPosition) / Time.deltaTime;
             lastPosition = mousePosition;

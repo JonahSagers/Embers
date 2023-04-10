@@ -32,17 +32,6 @@ public class CloudMove : MonoBehaviour
                 CloudParticles.Play();
                 raining = true;
             }
-            
-            
-            if(Position.x < -20f)
-            {
-                Xvel += wind.difficulty * 0.001f;
-            }
-            if(Position.x > 20f)
-            {
-                Xvel -= wind.difficulty * 0.001f;
-            }
-            
             gameObject.transform.position += new Vector3(Xvel,0,0);
         }
         if(sparks.gameOver == true)
@@ -73,5 +62,14 @@ public class CloudMove : MonoBehaviour
         {
             sparks.fireStrength -= wind.difficulty * 10;
         }
+        if(Position.x < -20f)
+        {
+            Xvel += wind.difficulty * 0.001f;
+        }
+        if(Position.x > 20f)
+        {
+            Xvel -= wind.difficulty * 0.001f;
+        }
+        Xvel = Mathf.Clamp(Xvel,-0.05f * wind.difficulty,0.05f * wind.difficulty);
     }
 }

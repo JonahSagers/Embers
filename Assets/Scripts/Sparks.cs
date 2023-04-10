@@ -71,7 +71,7 @@ public class Sparks : MonoBehaviour
             lightOffset /= 1.02f;
         }
         if(fireStrength > 0){
-            fireStrength -= 0.5f + 1f* wind.difficulty/10;
+            fireStrength -= 0.5f + wind.difficulty/10;
             fireStrength = Mathf.Clamp(fireStrength,0,1000);
         }
         if(gameOver == true)
@@ -95,13 +95,12 @@ public class Sparks : MonoBehaviour
         {
             woodpile.woodCount -= 1;
         }
-        
     }
 
     public void StokeFire()
     {
         sparksParticles.Play();
-        fireStrength += 10;
+        fireStrength += 12.5f + wind.difficulty/20;
         lightOffset = 0.5f;
     }
 }

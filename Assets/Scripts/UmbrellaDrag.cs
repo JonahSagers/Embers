@@ -9,6 +9,7 @@ public class UmbrellaDrag : MonoBehaviour
     public BoxCollider2D box;
     public GameObject selectedObject;
     public Sparks sparks;
+    public ScreenBounds bounds;
     public Vector3 umbrellaPos;
     public float Xpos;
     public float Ypos;
@@ -47,13 +48,13 @@ public class UmbrellaDrag : MonoBehaviour
             {
                 mousePosition.y = 8.45f;
             }
-            if(mousePosition.x < -17.1f)
+            if(mousePosition.x < bounds.bottomLeftCorner.x + 2.52f)
             {
-                mousePosition.x = -17.1f;
+                mousePosition.x = bounds.bottomLeftCorner.x + 2.52f;
             }
-            if(mousePosition.x > 17.1f)
+            if(mousePosition.x > bounds.topRightCorner.x - 2.52f)
             {
-                mousePosition.x = 17.1f;
+                mousePosition.x = bounds.topRightCorner.x - 2.52f;
             }
             Xpos = selectedObject.transform.position.x;
             Ypos = selectedObject.transform.position.y;
@@ -70,7 +71,6 @@ public class UmbrellaDrag : MonoBehaviour
                 rotation.z = (rotation.z - 360);
             }
             selectedObject.transform.rotation = Quaternion.AngleAxis(rotation.z + Xvel * 5, Vector3.forward);
-            
         }
         else
         {
@@ -80,25 +80,6 @@ public class UmbrellaDrag : MonoBehaviour
         if(selectedObject)
         {
             umbrellaPos.x += wind.windForce / 2;
-        }
-        
-        //if(umbrellaPos.y < -6.5f)
-        //{
-        //    umbrellaPos.y = -6.5f;
-        //}
-        //if(umbrellaPos.y > 7.5f)
-        //{
-        //    umbrellaPos.y = 7.5f;
-        //}
-        if(umbrellaPos.x < -21.5f)
-        {
-            umbrellaPos.x = -21.5f;
-            rb.velocity = new Vector2(0,rb.velocity.y);
-        }
-        if(umbrellaPos.x > 21.5f)
-        {
-            umbrellaPos.x = 21.5f;
-            rb.velocity = new Vector2(0,rb.velocity.y);
         }
         gameObject.transform.position = umbrellaPos;
         if (Input.GetMouseButtonUp(0) && selectedObject)

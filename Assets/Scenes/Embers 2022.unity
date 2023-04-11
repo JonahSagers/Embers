@@ -341,6 +341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 261402622}
+  - component: {fileID: 261402623}
   - component: {fileID: 261402621}
   - component: {fileID: 261402620}
   - component: {fileID: 261402619}
@@ -470,6 +471,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &261402623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 261402617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e899fa7555a119488a4166fc2e4d5b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  topRightCorner: {x: 0, y: 0}
+  bottomLeftCorner: {x: 0, y: 0}
+  woodBlock: {fileID: 1119781614}
+  woodPile: {fileID: 438004417}
+  sparks: {fileID: 784906252}
+  topBound: {fileID: 261402621}
+  bottomBound: {fileID: 261402619}
+  leftBound: {fileID: 261402620}
+  rightBound: {fileID: 261402618}
 --- !u!1 &282686499
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,8 +762,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sparks: {fileID: 784906252}
-  camera: {fileID: 519420031}
-  transform: {x: 0, y: 0, z: 0}
+  cam: {fileID: 519420031}
+  pos: {x: 0, y: 0, z: 0}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1081,7 +1103,7 @@ MonoBehaviour:
   textAnim: {fileID: 1267135401}
   text: {fileID: 1267135399}
   lightOffset: 0
-  score: 130
+  score: 0
   isDark: 0
   audioSources:
   - {fileID: 784906261}
@@ -1238,7 +1260,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -2094,7 +2116,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -2107,19 +2129,37 @@ ParticleSystem:
           time: 0
           value: 0
           inSlope: 0
-          outSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
+          time: 0.024614297
           value: 1
-          inSlope: 1
-          outSlope: 0
+          inSlope: -0
+          outSlope: -0
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0.60388917
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.7518719
+          value: 1
+          inSlope: -0
+          outSlope: -0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.19688593
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: 0.0000023061293
+          outSlope: 0.0000023061293
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 1
           outWeight: 0.33333334
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -6431,6 +6471,7 @@ MonoBehaviour:
   box: {fileID: 786313093}
   selectedObject: {fileID: 0}
   sparks: {fileID: 784906252}
+  bounds: {fileID: 261402623}
   umbrellaPos: {x: 0, y: 0, z: 0}
   Xpos: 0
   Ypos: 0
@@ -6498,7 +6539,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 786313087}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: -5, z: 0}
+  m_LocalPosition: {x: 12, y: -5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 26324091}
@@ -21868,7 +21909,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1411588213}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10, y: 8, z: 0}
+  m_LocalPosition: {x: 15, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1292998247}
@@ -22048,7 +22089,7 @@ Transform:
   m_GameObject: {fileID: 1514487065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 70.5, y: 30, z: 1}
+  m_LocalScale: {x: 200, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9

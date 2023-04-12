@@ -8,8 +8,8 @@ public class WoodToss : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        rb.velocity = new Vector2(Random.Range(10,20),Random.Range(8,12));
-        rb.angularVelocity = Random.Range(-600, 200);
+        rb.velocity = new Vector2(Random.Range(6,12),Random.Range(8,12));
+        rb.angularVelocity = Random.Range(-720, 180);
     }
 
     // Update is called once per frame

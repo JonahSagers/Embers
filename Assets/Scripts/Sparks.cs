@@ -86,7 +86,7 @@ public class Sparks : MonoBehaviour
             
         }
         if(fireStrength > 0){
-            fireStrength -= 0.25f + wind.difficulty/10;
+            fireStrength -= 0.4f + wind.difficulty/20;
             fireStrength = Mathf.Clamp(fireStrength,0,1000);
         }
         if(gameOver == true)

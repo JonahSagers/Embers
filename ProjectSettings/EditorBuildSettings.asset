@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Embers 2022.unity
+    guid: bf3c8f24624827240a7a20a8d2d7d980
   m_configObjects: {}

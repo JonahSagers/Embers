@@ -26,6 +26,5 @@ public class ScreenBounds : MonoBehaviour
             leftBound.offset = new Vector2(bottomLeftCorner.x - 5,0);
             rightBound.offset = new Vector2(topRightCorner.x + 5,0);
         }
-        Debug.Log(bottomLeftCorner);
     }
 }

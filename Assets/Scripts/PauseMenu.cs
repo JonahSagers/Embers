@@ -42,7 +42,9 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void QuitGame(){
-        Debug.Log("Game Quit");
-        Application.Quit();
+        if(paused){
+            Debug.Log("Game Quit");
+            Application.Quit();
+        }
     }
 }

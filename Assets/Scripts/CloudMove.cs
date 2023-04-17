@@ -32,7 +32,7 @@ public class CloudMove : MonoBehaviour
                 CloudParticles.Play();
                 raining = true;
             }
-            gameObject.transform.position += new Vector3(Xvel,0,0);
+            gameObject.transform.position += new Vector3(Xvel * Time.timeScale,0,0);
         }
         if(sparks.gameOver == true)
         {
@@ -64,11 +64,11 @@ public class CloudMove : MonoBehaviour
         }
         if(Position.x < -20f)
         {
-            Xvel += wind.difficulty * 0.001f;
+            Xvel += wind.difficulty * 0.001f * Time.timeScale;
         }
         if(Position.x > 20f)
         {
-            Xvel -= wind.difficulty * 0.001f;
+            Xvel -= wind.difficulty * 0.001f * Time.timeScale;
         }
         Xvel = Mathf.Clamp(Xvel,-0.05f * wind.difficulty,0.05f * wind.difficulty);
     }

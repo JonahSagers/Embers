@@ -115,7 +115,7 @@ public class Sparks : MonoBehaviour
     public void StokeFire()
     {
         sparksParticles.Play();
-        fireStrength += 25f + wind.difficulty/20;
+        fireStrength += 50f + wind.difficulty/20;
         lightOffset = 0.5f;
     }
 }

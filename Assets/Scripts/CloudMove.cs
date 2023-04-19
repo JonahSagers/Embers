@@ -19,6 +19,7 @@ public class CloudMove : MonoBehaviour
     Vector2 Pos;
     public WindImpulse wind;
     public bool raining;
+    public float direction;
 
     void Update()
     {
@@ -64,12 +65,15 @@ public class CloudMove : MonoBehaviour
         }
         if(Position.x < -20f)
         {
-            Xvel += wind.difficulty * 0.001f * Time.timeScale;
+            //for direction, 1 is right and -1 is left
+            direction = 1;
+            
         }
         if(Position.x > 20f)
         {
-            Xvel -= wind.difficulty * 0.001f * Time.timeScale;
+            direction = -1;
         }
-        Xvel = Mathf.Clamp(Xvel,-0.05f * wind.difficulty,0.05f * wind.difficulty);
+        Xvel += wind.difficulty * 0.001f * Time.timeScale * direction;
+        Xvel = Mathf.Clamp(Xvel,-0.025f * wind.difficulty,0.025f * wind.difficulty);
     }
 }

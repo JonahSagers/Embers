@@ -23,6 +23,7 @@ public class Sparks : MonoBehaviour
     public float score;
     public bool isDark;
     public List<AudioSource> audioSources;
+    public PauseMenu pauseMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,7 +62,7 @@ public class Sparks : MonoBehaviour
         {
             textAnim.SetFloat("sparkStrength", 100);
         }
-        if(Input.GetMouseButtonDown(0) && fireStrength < 1 && sparkStrength < 100 && gameOver == false)
+        if(Input.GetMouseButtonDown(0) && fireStrength < 1 && sparkStrength < 100 && gameOver == false && pauseMenu.paused == false)
         {
             sparksParticles.Play();
             //int audioValue = (int)(sparkStrength/20);

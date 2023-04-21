@@ -34,7 +34,7 @@ public class Sparks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(score > 150 && isDark == false)
+        if(score > 200 && isDark == false)
         {
             isDark = true;
             text.text = "It's getting dark";
@@ -84,7 +84,7 @@ public class Sparks : MonoBehaviour
             } else {
                 lightOffset /= 2f;
             }
-            
+
         }
         if(fireStrength > 0){
             fireStrength -= 0.4f + wind.difficulty/20;
@@ -97,12 +97,14 @@ public class Sparks : MonoBehaviour
                 resetCooldown -= 1;
                 fireStrength = 0;
             }
-            else 
+            else
             {
                 SceneManager.LoadScene("Embers 2022");
             }
         }
-        score += 0.04f * wind.difficulty;
+        if(gameOver == false && sparkStrength == 100){
+            score += 0.04f * wind.difficulty;
+        }
     }
 
     void OnMouseDown()

@@ -22,7 +22,7 @@ public class WindImpulse : MonoBehaviour
             windParticleEmission.rateOverTime = 4;
             //windParticleMain.startSpeed = windForce * 5;
             windImpulse.directionX = windForce * 4;
-            difficulty += 0.0002f;
+            difficulty += 0.001f;
             if(windDelay > 0)
             {
                 //windParticleMain.startLifetime = 0;

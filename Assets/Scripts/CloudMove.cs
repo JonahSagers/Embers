@@ -25,7 +25,7 @@ public class CloudMove : MonoBehaviour
     {
         Position = gameObject.transform.position;
         
-        if(sparks.sparkStrength >= 100 && wind.difficulty > 1.05f)
+        if(sparks.sparkStrength >= 100 && wind.difficulty > 1.1f)
         {
             if(raining == false)
             {
@@ -73,7 +73,7 @@ public class CloudMove : MonoBehaviour
         {
             direction = -1;
         }
-        Xvel += wind.difficulty * 0.001f * Time.timeScale * direction;
-        Xvel = Mathf.Clamp(Xvel,-0.025f * wind.difficulty,0.025f * wind.difficulty);
+        Xvel += wind.difficulty * 0.003f * Time.timeScale * direction;
+        Xvel = Mathf.Clamp(Xvel,-0.07f * wind.difficulty,0.07f * wind.difficulty);
     }
 }

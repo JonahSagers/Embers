@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class UmbrellaDrag : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class UmbrellaDrag : MonoBehaviour
     Vector2 mouseForce;
     Vector3 lastPosition;
     public LayerMask umbrella;
+    public List<Vector2> pastForces;
+
 
     void Update()
     {
@@ -34,9 +37,12 @@ public class UmbrellaDrag : MonoBehaviour
                 offset = selectedObject.transform.position - mousePosition;
             }
         }
+        if(pastForces.Count > 5 || (pastForces.Count > 0 && !selectedObject)){
+            pastForces.RemoveAt(0);
+        }
         if (selectedObject)
         {
-            mouseForce = (mousePosition - lastPosition) / Time.deltaTime;
+            pastForces.Add((mousePosition - lastPosition) / Time.deltaTime);
             lastPosition = mousePosition;
             rb.velocity = Vector2.zero;
             mousePosition.y += 1.5f;
@@ -74,7 +80,7 @@ public class UmbrellaDrag : MonoBehaviour
         }
         else
         {
-            rb.AddForce(new Vector3(wind.windForce / 4,0,0), ForceMode2D.Impulse);
+            rb.AddForce(new Vector3(wind.windForce * 5,0,0) * Time.deltaTime, ForceMode2D.Impulse);
         }
         umbrellaPos = gameObject.transform.position;
         if(selectedObject)
@@ -84,6 +90,7 @@ public class UmbrellaDrag : MonoBehaviour
         gameObject.transform.position = umbrellaPos;
         if (Input.GetMouseButtonUp(0) && selectedObject)
         {
+            mouseForce = pastForces.Aggregate(new Vector2(0,0), (s,v) => s + v) / (float)pastForces.Count;
             rb.AddForce(mouseForce/5, ForceMode2D.Impulse);
             selectedObject = null;
         }

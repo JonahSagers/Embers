@@ -24,6 +24,7 @@ public class Sparks : MonoBehaviour
     public bool isDark;
     public List<AudioSource> audioSources;
     public PauseMenu pauseMenu;
+    public List<string> badEndings;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,8 +56,13 @@ public class Sparks : MonoBehaviour
         {
             resetCooldown = 250;
             gameOver = true;
-            text.text = "Score: " + Mathf.Floor(score);
+            if(score > 100){
+                text.text = "Score: " + Mathf.Floor(score);
+            } else {
+                text.text = badEndings[Random.Range(0, badEndings.Count)];
+            }
             textAnim.SetFloat("sparkStrength", 0);
+            
         }
         if(resetCooldown < 100 && gameOver == true)
         {

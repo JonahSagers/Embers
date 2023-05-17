@@ -25,6 +25,7 @@ public class Sparks : MonoBehaviour
     public List<AudioSource> audioSources;
     public PauseMenu pauseMenu;
     public List<string> badEndings;
+    public Leaderboard leaderboard;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +59,7 @@ public class Sparks : MonoBehaviour
             gameOver = true;
             if(score > 100){
                 text.text = "Score: " + Mathf.Floor(score);
+                leaderboard.UploadScore("JamatoP", (int)score);
             } else {
                 text.text = badEndings[Random.Range(0, badEndings.Count)];
             }

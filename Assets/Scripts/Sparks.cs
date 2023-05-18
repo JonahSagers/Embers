@@ -26,6 +26,7 @@ public class Sparks : MonoBehaviour
     public PauseMenu pauseMenu;
     public List<string> badEndings;
     public Leaderboard leaderboard;
+    public bool menuTicking;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,18 +58,19 @@ public class Sparks : MonoBehaviour
         {
             resetCooldown = 250;
             gameOver = true;
+            menuTicking = true;
             if(score > 100){
                 text.text = "Score: " + Mathf.Floor(score);
                 leaderboard.UploadScore("JamatoP", (int)score);
             } else {
                 text.text = badEndings[Random.Range(0, badEndings.Count)];
             }
-            textAnim.SetFloat("sparkStrength", 0);
-            
+            textAnim.SetFloat("strength", 0);
+
         }
         if(resetCooldown < 100 && gameOver == true)
         {
-            textAnim.SetFloat("sparkStrength", 100);
+            textAnim.SetFloat("strength", 100);
         }
         if(Input.GetMouseButtonDown(0) && fireStrength < 1 && sparkStrength < 100 && gameOver == false && pauseMenu.paused == false)
         {
@@ -76,7 +78,7 @@ public class Sparks : MonoBehaviour
             //int audioValue = (int)(sparkStrength/20);
             //audioSources[audioValue].Play();
             sparkStrength += 20;
-            textAnim.SetFloat("sparkStrength", sparkStrength);
+            textAnim.SetFloat("strength", sparkStrength);
             if(sparkStrength >= 100)
             {
                 fireStrength += 1000;
@@ -100,14 +102,16 @@ public class Sparks : MonoBehaviour
         }
         if(gameOver == true)
         {
-            if(resetCooldown > 0)
+            if(resetCooldown > 0 && menuTicking == true)
             {
                 resetCooldown -= 1;
                 fireStrength = 0;
             }
             else
             {
-                SceneManager.LoadScene("Embers 2022");
+                if(menuTicking == true){
+                    SceneManager.LoadScene("Embers 2022");
+                }
             }
         }
         if(gameOver == false && sparkStrength == 100){
@@ -125,8 +129,10 @@ public class Sparks : MonoBehaviour
 
     public void StokeFire()
     {
-        sparksParticles.Play();
-        fireStrength += 50f + wind.difficulty/20;
-        lightOffset = 0.5f;
+        if(gameOver == false){
+            sparksParticles.Play();
+            fireStrength += 50f + wind.difficulty/20;
+            lightOffset = 0.5f;
+        }
     }
 }

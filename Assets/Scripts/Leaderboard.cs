@@ -12,6 +12,8 @@ public class Leaderboard : MonoBehaviour
     private string publicKey = "941df8ac185290d4cd31278cc4723d4a2ec002fb1fe2f37ee94d64c42f5d1973";
     public bool isReady;
     public Animator bottomText;
+    public TextMeshProUGUI topText;
+    public TMP_InputField input;
     // Start is called before the first frame update
     void Start()
     {
@@ -51,12 +53,30 @@ public class Leaderboard : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         bottomText.SetBool("active", false);
     }
-    public void UploadScore(string username, int score)
+    public IEnumerator UploadScore(string username, int score)
     {
+        if(username == null){
+            topText.text = "What should we call you?";
+            sparks.menuTicking = false;
+            yield return new WaitForSeconds(0.15f);
+            input.GetComponent<Animator>().SetBool("active", true);
+            input.Select();
+            while (!Input.GetKey(KeyCode.Return))
+            {
+                yield return null;
+            }
+            username = input.text;
+            topText.GetComponent<Animator>().SetFloat("strength", 100);
+            yield return new WaitForSeconds(0.15f);
+            input.GetComponent<Animator>().SetBool("active", false);
+            yield return new WaitForSeconds(1.35f);
+            topText.GetComponent<Animator>().SetFloat("strength", 0);
+            topText.text = "Score: " + Mathf.Floor(sparks.score);
+        }
         isReady = false;
-        //LeaderboardCreator.UploadNewEntry(publicKey, username, score, ((msg) => {
+        LeaderboardCreator.UploadNewEntry(publicKey, username, score, ((msg) => {
             StartCoroutine(UpdateLeaderboard(true));
-        //}));
+        }));
         isReady = true;
     }
 }

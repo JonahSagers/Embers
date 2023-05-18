@@ -61,12 +61,11 @@ public class Sparks : MonoBehaviour
             menuTicking = true;
             if(score > 100){
                 text.text = "Score: " + Mathf.Floor(score);
-                leaderboard.UploadScore("JamatoP", (int)score);
+                StartCoroutine(leaderboard.UploadScore(null, (int)score));
             } else {
                 text.text = badEndings[Random.Range(0, badEndings.Count)];
             }
             textAnim.SetFloat("strength", 0);
-
         }
         if(resetCooldown < 100 && gameOver == true)
         {

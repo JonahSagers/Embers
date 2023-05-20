@@ -87,6 +87,7 @@ public class Sparks : MonoBehaviour
     }
     void FixedUpdate()
     {
+        fireStrength = Mathf.Clamp(fireStrength,0,1000);
         if(lightOffset > 0){
             if(gameOver == false){
                 lightOffset /= 1.02f;
@@ -97,7 +98,6 @@ public class Sparks : MonoBehaviour
         }
         if(fireStrength > 0){
             fireStrength -= 0.4f + wind.difficulty/20;
-            fireStrength = Mathf.Clamp(fireStrength,0,1000);
         }
         if(gameOver == true)
         {

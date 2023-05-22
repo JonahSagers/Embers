@@ -22,7 +22,7 @@ public class Fire : MonoBehaviour
         var fireParticleShape = fireParticles.shape;
         windImpulse.directionX = wind.windForce * 4;
         fireParticleRate.rateOverTime = Mathf.Pow(2,sparks.fireStrength/100);
-        fireParticleDuration.startLifetime = sparks.fireStrength/800;
+        fireParticleDuration.startLifetime = Mathf.Log(sparks.fireStrength/10, 10) * 0.65f;
         fireParticleShape.radius = 1 + sparks.fireStrength/1000;
         fireParticleShape.randomPositionAmount = 1 + sparks.fireStrength/500;
         red.pointLightOuterRadius += (sparks.fireStrength/300 - red.pointLightOuterRadius)/3 + sparks.lightOffset/2;

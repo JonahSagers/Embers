@@ -27,17 +27,21 @@ public class Sparks : MonoBehaviour
     public List<string> badEndings;
     public Leaderboard leaderboard;
     public bool menuTicking;
+    public string username;
+    public int highScore;
     // Start is called before the first frame update
     void Start()
     {
         gameOver = false;
         fireStrength = 0;
+        username = null;
+        EncryptData.LoadData(this);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(score > 200 && isDark == false)
+        if(score > 500 && isDark == false)
         {
             isDark = true;
             text.text = "It's getting dark";
@@ -59,9 +63,10 @@ public class Sparks : MonoBehaviour
             resetCooldown = 250;
             gameOver = true;
             menuTicking = true;
+            EncryptData.EncryptScore(this);
             if(score > 100){
                 text.text = "Score: " + Mathf.Floor(score);
-                StartCoroutine(leaderboard.UploadScore(null, (int)score));
+                StartCoroutine(leaderboard.UploadScore(username, (int)score));
             } else {
                 text.text = badEndings[Random.Range(0, badEndings.Count)];
             }

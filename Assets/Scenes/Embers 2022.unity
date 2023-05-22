@@ -835,7 +835,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 120674132}
   m_TextViewport: {fileID: 1757132765}
   m_TextComponent: {fileID: 1967113226}
@@ -2856,6 +2856,7 @@ MonoBehaviour:
   - Don't worry, just try again
   leaderboard: {fileID: 1402759662}
   menuTicking: 0
+  username: 
 --- !u!199 &784906253
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -19788,6 +19789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sparks: {fileID: 784906252}
+  namesRaw: []
   names:
   - {fileID: 892940613}
   - {fileID: 582186181}
@@ -29928,7 +29930,7 @@ MonoBehaviour:
   windForce: 0
   windParticles: {fileID: 1567798250}
   windDirection: 0
-  difficulty: 100
+  difficulty: 1
   sparks: {fileID: 784906252}
   windImpulse: {fileID: 1567798253}
 --- !u!4 &1567798252

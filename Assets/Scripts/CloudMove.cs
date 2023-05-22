@@ -25,7 +25,7 @@ public class CloudMove : MonoBehaviour
     {
         Position = gameObject.transform.position;
         
-        if(sparks.sparkStrength >= 100 && wind.difficulty > 1.1f)
+        if(sparks.sparkStrength >= 100 && wind.difficulty > 1.25f)
         {
             if(raining == false)
             {

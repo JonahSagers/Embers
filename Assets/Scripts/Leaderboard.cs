@@ -21,7 +21,7 @@ public class Leaderboard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UpdateLeaderboard(false);
+        StartCoroutine(UpdateLeaderboard(false));
     }
     public IEnumerator UpdateLeaderboard(bool display)
     {
@@ -29,10 +29,16 @@ public class Leaderboard : MonoBehaviour
             int i = 0;
             if(namesRaw.Count == 0){
                 Debug.Log(msg);
-                // for(i = 0; i < msg.Count; i++){
-                //     namesRaw.Add(msg[i].Username);
-                //     i++;
-                // }
+                while(true){
+                    //always be careful around while true loops.  If you edit this, change it to a for loop or something that won't crash you
+                    try{
+                        namesRaw.Add(msg[i].Username);
+                    } catch{
+                        print("done");
+                        return;
+                    }
+                    i++;
+                }
             }
             for(i = 0; i < names.Count; i++){
                 names[i].text = msg[i].Username;
@@ -46,31 +52,30 @@ public class Leaderboard : MonoBehaviour
                 scores[i].gameObject.GetComponent<Animator>().SetBool("active", true);
                 yield return new WaitForSeconds(0.15f);
             }
-        }
-        yield return new WaitForSeconds(0.15f);
-        bottomText.text = "Click anywhere to continue";
-        bottomAnim.SetBool("active", true);
-        sparks.menuTicking = false;
-        while (!Input.GetMouseButtonDown(0))
-        {
-            yield return null;
-        }
-        if(display){
+            yield return new WaitForSeconds(0.15f);
+            bottomText.text = "Click anywhere to continue";
+            bottomAnim.SetBool("active", true);
+            sparks.menuTicking = false;
+            while (!Input.GetMouseButtonDown(0))
+            {
+                yield return null;
+            }
             for(int i = 0; i < names.Count; i++){
                 names[i].gameObject.GetComponent<Animator>().SetBool("active", false);
                 scores[i].gameObject.GetComponent<Animator>().SetBool("active", false);
                 yield return new WaitForSeconds(0.15f);
             }
+            sparks.menuTicking = true;
+            yield return new WaitForSeconds(0.15f);
+            bottomAnim.SetBool("active", false);
         }
-        sparks.menuTicking = true;
-        yield return new WaitForSeconds(0.15f);
-        bottomAnim.SetBool("active", false);
     }
     public IEnumerator UploadScore(string username, int score)
     {
         if(username == null){
             proceed = false;
             topText.text = "What should we call you?";
+            input.interactable = true;
             sparks.menuTicking = false;
             yield return new WaitForSeconds(0.15f);
             input.GetComponent<Animator>().SetBool("active", true);
@@ -82,8 +87,10 @@ public class Leaderboard : MonoBehaviour
             {
                 yield return null;
             }
+            input.interactable = false;
             proceed = false;
             username = input.text;
+            sparks.username = username;
             topText.GetComponent<Animator>().SetFloat("strength", 100);
             yield return new WaitForSeconds(0.15f);
             input.GetComponent<Animator>().SetBool("active", false);

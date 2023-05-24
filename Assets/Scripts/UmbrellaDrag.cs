@@ -85,7 +85,7 @@ public class UmbrellaDrag : MonoBehaviour
         umbrellaPos = gameObject.transform.position;
         if(selectedObject)
         {
-            umbrellaPos.x += wind.windForce / 3;
+            umbrellaPos.x += (Mathf.Log(Mathf.Abs(wind.windForce/100) + 0.01f, 10) + 2) * Mathf.Sign(wind.windForce);
         }
         gameObject.transform.position = umbrellaPos;
         if (Input.GetMouseButtonUp(0) && selectedObject)

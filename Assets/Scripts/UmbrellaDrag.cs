@@ -80,12 +80,12 @@ public class UmbrellaDrag : MonoBehaviour
         }
         else
         {
-            rb.AddForce(new Vector3(wind.windForce * 5,0,0) * Time.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(new Vector3(wind.windForce * 3,0,0) * Time.deltaTime, ForceMode2D.Impulse);
         }
         umbrellaPos = gameObject.transform.position;
         if(selectedObject)
         {
-            umbrellaPos.x += wind.windForce / 2;
+            umbrellaPos.x += (Mathf.Log(Mathf.Abs(wind.windForce/100) + 0.01f, 10) + 2) * Mathf.Sign(wind.windForce);
         }
         gameObject.transform.position = umbrellaPos;
         if (Input.GetMouseButtonUp(0) && selectedObject)

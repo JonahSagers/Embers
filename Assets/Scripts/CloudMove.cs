@@ -25,7 +25,7 @@ public class CloudMove : MonoBehaviour
     {
         Position = gameObject.transform.position;
         
-        if(sparks.sparkStrength >= 100 && wind.difficulty > 1.1f)
+        if(sparks.sparkStrength >= 100 && wind.difficulty > 1.25f)
         {
             if(raining == false)
             {
@@ -52,14 +52,14 @@ public class CloudMove : MonoBehaviour
         Pos.y = transform.position.y;
         RaycastHit2D hit = Physics2D.Raycast(Pos, Below, collisions);
         Debug.DrawLine(Pos, Below);
-        if(hit.collider == sparksRb && hit.collider != umbrellaRb)
+        if(hit.collider == sparksRb && hit.collider != umbrellaRb && sparks.gameOver == false)
         {
             sparks.fireStrength -= wind.difficulty * 10;
         }
         Pos.x = transform.position.x + 1;
         Below.x = transform.position.x + 1;
         Debug.DrawLine(Pos, Below);
-        if(hit.collider == sparksRb && hit.collider != umbrellaRb)
+        if(hit.collider == sparksRb && hit.collider != umbrellaRb && sparks.gameOver == false)
         {
             sparks.fireStrength -= wind.difficulty * 10;
         }

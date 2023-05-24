@@ -34,8 +34,8 @@ public class Sparks : MonoBehaviour
     {
         gameOver = false;
         fireStrength = 0;
-        username = null;
-        EncryptData.LoadData(this);
+        PlayerData data = EncryptData.LoadData(this);
+        highScore = data.highScore;
     }
 
     // Update is called once per frame
@@ -63,11 +63,20 @@ public class Sparks : MonoBehaviour
             resetCooldown = 250;
             gameOver = true;
             menuTicking = true;
-            EncryptData.EncryptScore(this);
-            if(score > 100){
-                text.text = "Score: " + Mathf.Floor(score);
-                StartCoroutine(leaderboard.UploadScore(username, (int)score));
+            text.text = "Score: " + Mathf.Floor(score);
+            if(score > highScore){
+                highScore = (int)score;
+                EncryptData.EncryptScore(this);
+                if(highScore > 1000){
+                    PlayerData data = EncryptData.LoadData(this);
+                    StartCoroutine(leaderboard.UploadScore(username, (int)highScore));
+                }
             } else {
+                if(highScore > 1000){
+                    StartCoroutine(leaderboard.UpdateLeaderboard(true));
+                }
+            }
+            if(highScore < 100){
                 text.text = badEndings[Random.Range(0, badEndings.Count)];
             }
             textAnim.SetFloat("strength", 0);

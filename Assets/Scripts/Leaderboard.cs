@@ -17,6 +17,8 @@ public class Leaderboard : MonoBehaviour
     public TextMeshProUGUI bottomText;
     public TextMeshProUGUI topText;
     public TMP_InputField input;
+    public TextMeshProUGUI notice; 
+    public float noticeCD;
     public bool proceed;
     // Start is called before the first frame update
     void Start()
@@ -56,7 +58,7 @@ public class Leaderboard : MonoBehaviour
             bottomText.text = "Click anywhere to continue";
             bottomAnim.SetBool("active", true);
             sparks.menuTicking = false;
-            while (!Input.GetMouseButtonDown(0))
+            while (!Input.GetMouseButtonDown(0) && !Input.GetKey(KeyCode.Return))
             {
                 yield return null;
             }
@@ -72,25 +74,37 @@ public class Leaderboard : MonoBehaviour
     }
     public IEnumerator UploadScore(string username, int score)
     {
-        if(username == null){
+        if(username == ""){
             proceed = false;
             topText.text = "What should we call you?";
             input.interactable = true;
-            sparks.menuTicking = false;
             yield return new WaitForSeconds(0.15f);
             input.GetComponent<Animator>().SetBool("active", true);
             yield return new WaitForSeconds(0.15f);
             bottomText.text = "Click here to continue";
+            sparks.menuTicking = false;
             bottomAnim.SetBool("active", true);
             input.Select();
-            while ((!Input.GetKey(KeyCode.Return) && !proceed) || input.text == "")
+            while ((!Input.GetKey(KeyCode.Return) && !proceed) || input.text == "" || namesRaw.Contains(input.text))
             {
+                input.Select();
+                if(Input.GetKey(KeyCode.Return) && namesRaw.Contains(input.text)){
+                    noticeCD = 100;
+                }
+                if(noticeCD > 0){
+                    notice.enabled = true;
+                    noticeCD -= 1;
+                } else {
+                    notice.enabled = false;
+                }
                 yield return null;
             }
+            notice.enabled = false;
             input.interactable = false;
             proceed = false;
             username = input.text;
             sparks.username = username;
+            PlayerPrefs.SetString("Username", username);
             topText.GetComponent<Animator>().SetFloat("strength", 100);
             yield return new WaitForSeconds(0.15f);
             input.GetComponent<Animator>().SetBool("active", false);

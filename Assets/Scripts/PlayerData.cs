@@ -5,22 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 { 
-    // Start is called before the first frame update
     public int highScore;
-    public string username;
 
     public PlayerData(Sparks sparks)
     {
-        Debug.Log("Testing for high score...");
-        if((int)sparks.score > sparks.highScore){
-            sparks.highScore = (int)sparks.score;
-            highScore = sparks.highScore;
-            Debug.Log("High score found");
-        }
-        if(sparks.username != null){
-            username = sparks.username;
-        } else {
-            sparks.username = username;
-        }
+        //STRINGS CANNOT BE SERIALIZED AAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHH
+        //playerprefs is used to store username, but it's not very secure, hence highscore being encoded
+        highScore = sparks.highScore;
+        sparks.username = PlayerPrefs.GetString("Username");
     }
 }

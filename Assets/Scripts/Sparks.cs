@@ -29,11 +29,14 @@ public class Sparks : MonoBehaviour
     public bool menuTicking;
     public string username;
     public int highScore;
+    public float marshmalloCD;
+    public GameObject marshmalloPre;
     // Start is called before the first frame update
     void Start()
     {
         gameOver = false;
         fireStrength = 0;
+        marshmalloCD = 0;
         PlayerData data = EncryptData.LoadData(this);
         highScore = data.highScore;
     }
@@ -41,6 +44,15 @@ public class Sparks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(score > 250)
+        {
+            if(marshmalloCD > 0){
+                marshmalloCD -= Time.deltaTime;
+            } else {
+                Instantiate(marshmalloPre);
+                marshmalloCD += 20;
+            }
+        }
         if(score > 500 && isDark == false)
         {
             isDark = true;

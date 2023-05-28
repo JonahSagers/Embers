@@ -88,7 +88,7 @@ public class Sparks : MonoBehaviour
                     StartCoroutine(leaderboard.UploadScore(username, (int)highScore));
                 }
             } else {
-                if(highScore > 1000){
+                if(highScore > 500){
                     StartCoroutine(leaderboard.UpdateLeaderboard(true));
                 }
             }

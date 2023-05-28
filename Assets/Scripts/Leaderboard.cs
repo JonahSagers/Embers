@@ -30,13 +30,11 @@ public class Leaderboard : MonoBehaviour
         LeaderboardCreator.GetLeaderboard(publicKey, ((msg) => {
             int i = 0;
             if(namesRaw.Count == 0){
-                Debug.Log(msg);
                 while(true){
                     //always be careful around while true loops.  If you edit this, change it to a for loop or something that won't crash you
                     try{
                         namesRaw.Add(msg[i].Username);
                     } catch{
-                        print("done");
                         return;
                     }
                     i++;

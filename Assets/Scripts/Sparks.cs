@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.IO;
 
 public class Sparks : MonoBehaviour
 {
@@ -34,25 +35,29 @@ public class Sparks : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // if (!System.IO.File.Exists(Application.persistentDataPath + "/player.dat"))
+        // {
+        //     EncryptData.EncryptScore(this);
+        // }
         gameOver = false;
         fireStrength = 0;
         marshmalloCD = 0;
-        PlayerData data = EncryptData.LoadData(this);
-        highScore = data.highScore;
+        // PlayerData data = EncryptData.LoadData(this);
+        // highScore = data.highScore;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(score > 250)
-        {
-            if(marshmalloCD > 0){
-                marshmalloCD -= Time.deltaTime;
-            } else {
-                Instantiate(marshmalloPre);
-                marshmalloCD += 20;
-            }
-        }
+        // if(score > 250)
+        // {
+        //     if(marshmalloCD > 0){
+        //         marshmalloCD -= Time.deltaTime;
+        //     } else {
+        //         Instantiate(marshmalloPre);
+        //         marshmalloCD += 20;
+        //     }
+        // }
         if(score > 500 && isDark == false)
         {
             isDark = true;
@@ -80,7 +85,7 @@ public class Sparks : MonoBehaviour
                 highScore = (int)score;
                 EncryptData.EncryptScore(this);
                 if(highScore > 1000){
-                    PlayerData data = EncryptData.LoadData(this);
+                    // PlayerData data = EncryptData.LoadData(this);
                     StartCoroutine(leaderboard.UploadScore(username, (int)highScore));
                 }
             } else {

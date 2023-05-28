@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -23,6 +23,7 @@ public class UmbrellaDrag : MonoBehaviour
     public LayerMask umbrella;
     public List<Vector2> pastForces;
 
+    //This whole script is pretty unoptimized.  Run through it later
 
     void Update()
     {
@@ -45,23 +46,7 @@ public class UmbrellaDrag : MonoBehaviour
             pastForces.Add((mousePosition - lastPosition) / Time.deltaTime);
             lastPosition = mousePosition;
             rb.velocity = Vector2.zero;
-            mousePosition.y += 1.5f;
-            if(mousePosition.y < -7.523f)
-            {
-                mousePosition.y = -7.523f;
-            }
-            if(mousePosition.y > 8.45f)
-            {
-                mousePosition.y = 8.45f;
-            }
-            if(mousePosition.x < bounds.bottomLeftCorner.x + 2.52f)
-            {
-                mousePosition.x = bounds.bottomLeftCorner.x + 2.52f;
-            }
-            if(mousePosition.x > bounds.topRightCorner.x - 2.52f)
-            {
-                mousePosition.x = bounds.topRightCorner.x - 2.52f;
-            }
+            mousePosition = new Vector3(Mathf.Clamp(mousePosition.x, bounds.bottomLeftCorner.x + 2.52f, bounds.topRightCorner.x - 2.52f), Mathf.Clamp(mousePosition.y + 1.5f, -7.523f, 8.45f));
             Xpos = selectedObject.transform.position.x;
             Ypos = selectedObject.transform.position.y;
             selectedObject.transform.position = mousePosition;

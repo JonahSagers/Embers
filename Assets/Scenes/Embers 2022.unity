@@ -8194,8 +8194,8 @@ GameObject:
   - component: {fileID: 786313089}
   - component: {fileID: 786313088}
   - component: {fileID: 786313092}
-  - component: {fileID: 786313093}
   - component: {fileID: 786313094}
+  - component: {fileID: 786313091}
   m_Layer: 6
   m_Name: Umbrella Handle
   m_TagString: Umbrella
@@ -8217,7 +8217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 786313092}
   wind: {fileID: 1567798251}
-  box: {fileID: 786313093}
+  box: {fileID: 0}
   selectedObject: {fileID: 0}
   sparks: {fileID: 784906252}
   bounds: {fileID: 261402623}
@@ -8296,6 +8296,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &786313091
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786313087}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4
 --- !u!50 &786313092
 Rigidbody2D:
   serializedVersion: 4
@@ -8317,32 +8333,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &786313093
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 786313087}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 5}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5, y: 5}
-  m_EdgeRadius: 0
 --- !u!60 &786313094
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -13783,7 +13773,6 @@ MonoBehaviour:
   woodParticles: {fileID: 1119781612}
   woodCount: 0
   sparks: {fileID: 784906252}
-  chopDelay: 0
 --- !u!61 &1119781616
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14593,7 +14582,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -14656,7 +14645,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -5
+      scalar: -10
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -15094,7 +15083,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -17875,7 +17864,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    range: {x: 0, y: 1}
+    range: {x: 0, y: 5}
     separateAxes: 0
   RotationBySpeedModule:
     enabled: 0
@@ -24745,7 +24734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sparks: {fileID: 784906252}
   sparksRb: {fileID: 784906256}
-  umbrellaRb: {fileID: 786313093}
+  umbrellaRb: {fileID: 0}
   Xvel: -0.05
   Xpos: 10
   RainParticles: {fileID: 1292998249}
@@ -29936,7 +29925,7 @@ MonoBehaviour:
   windForce: 0
   windParticles: {fileID: 1567798250}
   windDirection: 0
-  difficulty: 1
+  difficulty: 0.75
   sparks: {fileID: 784906252}
   windImpulse: {fileID: 1567798253}
 --- !u!4 &1567798252

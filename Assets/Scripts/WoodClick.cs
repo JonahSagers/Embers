@@ -8,7 +8,6 @@ public class WoodClick : MonoBehaviour
     public ParticleSystem woodParticles;
     public float woodCount;
     public Sparks sparks;
-    public float chopDelay;
     
     void Update()
     {
@@ -19,22 +18,12 @@ public class WoodClick : MonoBehaviour
             Collider2D targetObject = Physics2D.OverlapPoint(mousePosition, wood);
             if (targetObject)
             {
-                Debug.Log("Wood Clicked");
-                if(woodCount < 6 && chopDelay < 1)
+                if(woodCount < 6)
                 {
                     woodParticles.Play();
                     woodCount += 1;
-                    //chopDelay = 20;
-                    //Use this to prevent chop spamming
                 }
             }
         }
     }
-
-    // void FixedUpdate()
-    // {
-    //     if(chopDelay > 0){
-    //         chopDelay -= 1;
-    //     }
-    // }
 }

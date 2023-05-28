@@ -7,23 +7,16 @@ public class UmbrellaDrag : MonoBehaviour
 {
     public Rigidbody2D rb;
     public WindImpulse wind;
-    public BoxCollider2D box;
     public GameObject selectedObject;
     public Sparks sparks;
     public ScreenBounds bounds;
-    public Vector3 umbrellaPos;
     public float Xpos;
-    public float Ypos;
     public float Xvel;
-    public float Yvel;
-    Vector3 offset;
-    Vector3 rotation;
+    public Vector3 rotation;
     Vector2 mouseForce;
     Vector3 lastPosition;
     public LayerMask umbrella;
     public List<Vector2> pastForces;
-
-    //This whole script is pretty unoptimized.  Run through it later
 
     void Update()
     {
@@ -35,7 +28,6 @@ public class UmbrellaDrag : MonoBehaviour
             if (targetObject)
             {
                 selectedObject = targetObject.transform.gameObject;
-                offset = selectedObject.transform.position - mousePosition;
             }
         }
         if(pastForces.Count > 5 || (pastForces.Count > 0 && !selectedObject)){
@@ -47,32 +39,21 @@ public class UmbrellaDrag : MonoBehaviour
             lastPosition = mousePosition;
             rb.velocity = Vector2.zero;
             mousePosition = new Vector3(Mathf.Clamp(mousePosition.x, bounds.bottomLeftCorner.x + 2.52f, bounds.topRightCorner.x - 2.52f), Mathf.Clamp(mousePosition.y + 1.5f, -7.523f, 8.45f));
+            //I know it seems redundant to store position, but this is for saving the previous position of the umbrella to calculate velocity
             Xpos = selectedObject.transform.position.x;
-            Ypos = selectedObject.transform.position.y;
             selectedObject.transform.position = mousePosition;
             rotation = selectedObject.transform.rotation.eulerAngles;
-            if(rotation.z > 180){
-                rotation.z = (rotation.z - 360);
-            }
-            selectedObject.transform.rotation = Quaternion.AngleAxis(rotation.z/1.25f, Vector3.forward);
             Xvel = selectedObject.transform.position.x - Xpos;
-            Yvel = selectedObject.transform.position.y - Ypos;
-            rotation = selectedObject.transform.rotation.eulerAngles;
             if(rotation.z > 180){
-                rotation.z = (rotation.z - 360);
+                rotation.z -= 360;
             }
-            selectedObject.transform.rotation = Quaternion.AngleAxis(rotation.z + Xvel * 5, Vector3.forward);
+            selectedObject.transform.Rotate(0, 0, -rotation.z/4 + Xvel * 5, Space.World);
+            transform.position += new Vector3(0,0,(Mathf.Log(Mathf.Abs(wind.windForce/100) + 0.01f, 10) + 2) * Mathf.Sign(wind.windForce));
         }
         else
         {
             rb.AddForce(new Vector3(wind.windForce * 3,0,0) * Time.deltaTime, ForceMode2D.Impulse);
         }
-        umbrellaPos = gameObject.transform.position;
-        if(selectedObject)
-        {
-            umbrellaPos.x += (Mathf.Log(Mathf.Abs(wind.windForce/100) + 0.01f, 10) + 2) * Mathf.Sign(wind.windForce);
-        }
-        gameObject.transform.position = umbrellaPos;
         if (Input.GetMouseButtonUp(0) && selectedObject)
         {
             mouseForce = pastForces.Aggregate(new Vector2(0,0), (s,v) => s + v) / (float)pastForces.Count;

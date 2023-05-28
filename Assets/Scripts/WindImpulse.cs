@@ -17,7 +17,7 @@ public class WindImpulse : MonoBehaviour
     {
         var windParticleEmission = windParticles.emission;
         var windParticleMain = windParticles.main;
-        if(sparks.gameOver == false && sparks.sparkStrength == 100)
+        if(sparks.gameOver == false && sparks.sparked)
         {
             windParticleEmission.rateOverTime = 4;
             //windParticleMain.startSpeed = windForce * 5;

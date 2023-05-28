@@ -10,7 +10,7 @@ public class Sparks : MonoBehaviour
 {
     public ParticleSystem sparksParticles;
     public float fireStrength;
-    public float sparkStrength;
+    public bool sparked;
     public WoodClick woodpile;
     public WindImpulse wind;
     public bool gameOver;
@@ -23,7 +23,6 @@ public class Sparks : MonoBehaviour
     public float lightOffset;
     public float score;
     public bool isDark;
-    public List<AudioSource> audioSources;
     public PauseMenu pauseMenu;
     public List<string> badEndings;
     public Leaderboard leaderboard;
@@ -75,7 +74,7 @@ public class Sparks : MonoBehaviour
                 fog.intensity = 1;
             }
         }
-        if(fireStrength <= 0 && gameOver == false && sparkStrength >= 100)
+        if(fireStrength <= 0 && gameOver == false && sparked)
         {
             resetCooldown = 250;
             gameOver = true;
@@ -102,18 +101,12 @@ public class Sparks : MonoBehaviour
         {
             textAnim.SetFloat("strength", 100);
         }
-        if(Input.GetMouseButtonDown(0) && fireStrength < 1 && sparkStrength < 100 && gameOver == false && pauseMenu.paused == false)
+        if(Input.GetMouseButtonDown(0) && fireStrength < 1 && gameOver == false && pauseMenu.paused == false)
         {
-            sparksParticles.Play();
-            //int audioValue = (int)(sparkStrength/20);
-            //audioSources[audioValue].Play();
-            sparkStrength += 20;
-            textAnim.SetFloat("strength", sparkStrength);
-            if(sparkStrength >= 100)
-            {
-                fireStrength += 1000;
-                fireParticles.Play();
-            }
+            sparked = true;
+            textAnim.SetBool("sparked", true);
+            fireStrength += 1000;
+            fireParticles.Play();
         }
     }
     void FixedUpdate()
@@ -125,10 +118,10 @@ public class Sparks : MonoBehaviour
             } else {
                 lightOffset /= 2f;
             }
-
         }
         if(fireStrength > 0){
             fireStrength -= 0.4f + wind.difficulty/20;
+            score += 0.04f * wind.difficulty;
         }
         if(gameOver == true)
         {
@@ -143,9 +136,6 @@ public class Sparks : MonoBehaviour
                     SceneManager.LoadScene("Embers 2022");
                 }
             }
-        }
-        if(gameOver == false && sparkStrength == 100){
-            score += 0.04f * wind.difficulty;
         }
     }
 

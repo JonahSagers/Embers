@@ -69,7 +69,7 @@ public class PauseMenu : MonoBehaviour
         }
         Time.timeScale = Mathf.Clamp(1 - (blurStrength/30),0,1);
         textAnim.SetBool("shown", paused);
-        if(sparks.sparkStrength == 100 && sparks.gameOver == false && paused == false){
+        if(sparks.sparked && sparks.gameOver == false && paused == false){
             pauseButton.SetBool("shown", true);
         } else {
             pauseButton.SetBool("shown", false);

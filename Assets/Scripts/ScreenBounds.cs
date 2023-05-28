@@ -20,7 +20,7 @@ public class ScreenBounds : MonoBehaviour
         topRightCorner = new Vector2(Mathf.Clamp(topRightCorner.x,5,50),Mathf.Clamp(topRightCorner.y,0.5f,15));
         bottomLeftCorner = Camera.main.ViewportToWorldPoint(new Vector2(0,0));
         bottomLeftCorner = new Vector2(Mathf.Clamp(bottomLeftCorner.x,-50,-5),Mathf.Clamp(bottomLeftCorner.y,-15,-0.5f));
-        if(sparks.gameOver == false && sparks.sparkStrength >= 100){
+        if(sparks.gameOver == false && sparks.sparked){
             topBound.offset = new Vector2(0,topRightCorner.y + 5);
             bottomBound.offset = new Vector2(0,bottomLeftCorner.y - 4);
             leftBound.offset = new Vector2(bottomLeftCorner.x - 5,0);

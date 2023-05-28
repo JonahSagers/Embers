@@ -15,7 +15,7 @@ public class CameraControl : MonoBehaviour
     //if the camera is not in the right place, set the y position to -4.5
     void Update()
     {
-        if(sparks.sparkStrength == 100 && cam.orthographicSize < 11)
+        if(sparks.sparked && cam.orthographicSize < 11)
         {
             pos = gameObject.transform.position;
             cam.orthographicSize += (11.1f - cam.orthographicSize) / 100;

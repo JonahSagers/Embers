@@ -20,6 +20,7 @@ public class Leaderboard : MonoBehaviour
     public TextMeshProUGUI notice; 
     public float noticeCD;
     public bool proceed;
+    public bool mobile;
     // Start is called before the first frame update
     void Start()
     {
@@ -103,13 +104,13 @@ public class Leaderboard : MonoBehaviour
             username = input.text;
             sparks.username = username;
             PlayerPrefs.SetString("Username", username);
-            topText.GetComponent<Animator>().SetFloat("strength", 100);
+            topText.GetComponent<Animator>().SetBool("sparked", true);
             yield return new WaitForSeconds(0.15f);
             input.GetComponent<Animator>().SetBool("active", false);
             yield return new WaitForSeconds(0.25f);
             bottomAnim.SetBool("active", false);
             yield return new WaitForSeconds(1f);
-            topText.GetComponent<Animator>().SetFloat("strength", 0);
+            topText.GetComponent<Animator>().SetBool("sparked", false);
             topText.text = "Score: " + Mathf.Floor(sparks.score);
         }
         isReady = false;
@@ -121,5 +122,9 @@ public class Leaderboard : MonoBehaviour
 
     public void bottomClicked(){
         proceed = true;
+    }
+
+    public void keyboard(){
+        TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
     }
 }

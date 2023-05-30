@@ -34,6 +34,7 @@ public class Sparks : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Input.multiTouchEnabled = false;
         // if (!System.IO.File.Exists(Application.persistentDataPath + "/player.dat"))
         // {
         //     EncryptData.EncryptScore(this);
@@ -83,7 +84,7 @@ public class Sparks : MonoBehaviour
             if(score > highScore){
                 highScore = (int)score;
                 EncryptData.EncryptScore(this);
-                if(highScore > 1000){
+                if(highScore > 500){
                     // PlayerData data = EncryptData.LoadData(this);
                     StartCoroutine(leaderboard.UploadScore(username, (int)highScore));
                 }
@@ -95,11 +96,11 @@ public class Sparks : MonoBehaviour
             if(highScore < 100){
                 text.text = badEndings[Random.Range(0, badEndings.Count)];
             }
-            textAnim.SetFloat("strength", 0);
+            textAnim.SetBool("sparked", false);
         }
         if(resetCooldown < 100 && gameOver == true)
         {
-            textAnim.SetFloat("strength", 100);
+            textAnim.SetBool("sparked", true);
         }
         if(Input.GetMouseButtonDown(0) && fireStrength < 1 && gameOver == false && pauseMenu.paused == false)
         {

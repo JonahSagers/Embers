@@ -863,7 +863,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1402759662}
+        m_TargetAssemblyTypeName: Leaderboard, Assembly-CSharp
+        m_MethodName: keyboard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnDeselect:
     m_PersistentCalls:
       m_Calls: []
@@ -2830,7 +2842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sparksParticles: {fileID: 784906254}
   fireStrength: 0
-  sparkStrength: 0
+  sparked: 0
   woodpile: {fileID: 1119781615}
   wind: {fileID: 1567798251}
   gameOver: 0
@@ -2843,12 +2855,6 @@ MonoBehaviour:
   lightOffset: 0
   score: 0
   isDark: 0
-  audioSources:
-  - {fileID: 784906261}
-  - {fileID: 784906260}
-  - {fileID: 784906259}
-  - {fileID: 784906258}
-  - {fileID: 784906257}
   pauseMenu: {fileID: 519420035}
   badEndings:
   - Keep trying
@@ -29922,7 +29928,7 @@ MonoBehaviour:
   windForce: 0
   windParticles: {fileID: 1567798250}
   windDirection: 0
-  difficulty: 0.75
+  difficulty: 1
   sparks: {fileID: 784906252}
   windImpulse: {fileID: 1567798253}
 --- !u!4 &1567798252

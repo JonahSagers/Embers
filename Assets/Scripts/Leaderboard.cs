@@ -80,13 +80,17 @@ public class Leaderboard : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
             input.GetComponent<Animator>().SetBool("active", true);
             yield return new WaitForSeconds(0.15f);
-            bottomText.text = "Click here to continue";
             sparks.menuTicking = false;
             bottomAnim.SetBool("active", true);
             input.Select();
-            while ((!Input.GetKey(KeyCode.Return) && !proceed) || input.text == "" || namesRaw.Contains(input.text))
+            while ((!Input.GetKey(KeyCode.Return) && !proceed) || namesRaw.Contains(input.text))
             {
                 input.Select();
+                if(input.text == ""){
+                    bottomText.text = "Click here to skip";
+                } else {
+                    bottomText.text = "Click here to continue";
+                }
                 if(Input.GetKey(KeyCode.Return) && namesRaw.Contains(input.text)){
                     noticeCD = 100;
                 }
@@ -103,7 +107,7 @@ public class Leaderboard : MonoBehaviour
             proceed = false;
             username = input.text;
             sparks.username = username;
-            PlayerPrefs.SetString("Username", username);
+            PlayerPrefs.SetString("username", username);
             topText.GetComponent<Animator>().SetBool("sparked", true);
             yield return new WaitForSeconds(0.15f);
             input.GetComponent<Animator>().SetBool("active", false);
@@ -114,9 +118,13 @@ public class Leaderboard : MonoBehaviour
             topText.text = "Score: " + Mathf.Floor(sparks.score);
         }
         isReady = false;
-        LeaderboardCreator.UploadNewEntry(publicKey, username, score, ((msg) => {
+        if(username == ""){
             StartCoroutine(UpdateLeaderboard(true));
-        }));
+        } else {
+            LeaderboardCreator.UploadNewEntry(publicKey, username, score, ((msg) => {
+                StartCoroutine(UpdateLeaderboard(true));
+            }));
+        }
         isReady = true;
     }
 

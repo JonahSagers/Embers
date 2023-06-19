@@ -31,22 +31,16 @@ public class Sparks : MonoBehaviour
     public int highScore;
     public float marshmalloCD;
     public GameObject marshmalloPre;
-    // Start is called before the first frame update
     void Start()
     {
+        username = PlayerPrefs.GetString("username");
+        highScore = PlayerPrefs.GetInt("highScore");
         Input.multiTouchEnabled = false;
-        // if (!System.IO.File.Exists(Application.persistentDataPath + "/player.dat"))
-        // {
-        //     EncryptData.EncryptScore(this);
-        // }
         gameOver = false;
         fireStrength = 0;
         marshmalloCD = 0;
-        // PlayerData data = EncryptData.LoadData(this);
-        // highScore = data.highScore;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // if(score > 250)
@@ -83,9 +77,8 @@ public class Sparks : MonoBehaviour
             text.text = "Score: " + Mathf.Floor(score);
             if(score > highScore){
                 highScore = (int)score;
-                EncryptData.EncryptScore(this);
+                PlayerPrefs.SetInt("highScore",(int)score);
                 if(highScore > 500){
-                    // PlayerData data = EncryptData.LoadData(this);
                     StartCoroutine(leaderboard.UploadScore(username, (int)highScore));
                 }
             } else {

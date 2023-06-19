@@ -18,7 +18,7 @@ public class CameraControl : MonoBehaviour
         if(sparks.sparked && cam.orthographicSize < 11)
         {
             pos = gameObject.transform.position;
-            cam.orthographicSize += (11.1f - cam.orthographicSize) / 100;
+            cam.orthographicSize += (11.1f - cam.orthographicSize) / 150;
             pos.y += (0 - pos.y) / 90;
             gameObject.transform.position = pos;
         }
